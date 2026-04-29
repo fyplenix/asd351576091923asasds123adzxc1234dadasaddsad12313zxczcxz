@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+        body { margin: 0; font-family: 'Inter', sans-serif; background: transparent; overflow: hidden; color: white; user-select: none; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .faction-window { width: 950px; height: 680px; background: rgba(15, 15, 22, 0.90); backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; display: flex; flex-direction: column; box-shadow: 0 30px 60px rgba(0,0,0,0.8); position: relative; overflow: hidden; }
+        .header { height: 90px; background: linear-gradient(90deg, rgba(41, 128, 185, 0.2) 0%, rgba(0,0,0,0) 100%); border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; padding: 0 40px; }
+        .faction-info h1 { margin: 0; font-size: 26px; font-weight: 900; letter-spacing: -1px; text-transform: uppercase; color: #3498db; }
+        .faction-info p { margin: 5px 0 0 0; color: #888; font-size: 13px; }
+        .bank-info { text-align: right; }
+        .bank-info h3 { margin: 0; color: #2ecc71; font-size: 22px; font-weight: 700; }
+        .bank-info span { color: #666; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+        .close-btn { position: absolute; top: 25px; right: 25px; background: rgba(255,255,255,0.05); border: none; color: #aaa; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; font-size: 16px; }
+        .close-btn:hover { background: #e74c3c; color: white; transform: rotate(90deg); }
+        .global-motd { display: flex; background: rgba(52, 152, 219, 0.1); border-bottom: 1px solid rgba(52, 152, 219, 0.2); border-left: 4px solid #3498db; padding: 15px 30px; align-items: center; gap: 15px; }
+        .motd-icon { font-size: 24px; }
+        .motd-content { flex: 1; }
+        .motd-title { font-size: 11px; color: #3498db; text-transform: uppercase; font-weight: bold; margin-bottom: 3px; letter-spacing: 1px; }
+        .motd-text { color: #ecf0f1; font-size: 14px; font-weight: 500; white-space: pre-wrap; line-height: 1.4; }
+        
+        .tab-menu { display: flex; background: rgba(0,0,0,0.3); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 0 20px; }
+        .tab-btn { padding: 15px 25px; cursor: pointer; color: #888; font-weight: 600; font-size: 13px; text-transform: uppercase; border-bottom: 2px solid transparent; transition: 0.3s; }
+        .tab-btn:hover { color: white; }
+        .tab-btn.active { color: #3498db; border-bottom: 2px solid #3498db; }
+        .tab-content { display: none; flex: 1; padding: 25px; gap: 25px; height: 100%; overflow: hidden; }
+        .tab-content.active { display: flex; }
+        
+        .members-section { flex: 2; background: rgba(0,0,0,0.4); border-radius: 15px; border: 1px solid rgba(255,255,255,0.03); display: flex; flex-direction: column; overflow: hidden; }
+        .list-header { display: flex; padding: 15px 20px; background: rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12px; color: #888; text-transform: uppercase; font-weight: 700; align-items: center; }
+        .col-name { flex: 2; } .col-rank { flex: 1; } .col-status { width: 100px; text-align: center; } .col-minrank { width: 100px; text-align: center; }
+        .member-list { flex: 1; overflow-y: auto; padding: 10px; }
+        .member-list::-webkit-scrollbar { width: 6px; }
+        .member-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        .member-item { display: flex; padding: 15px 10px; border-radius: 10px; margin-bottom: 5px; cursor: pointer; transition: 0.2s; align-items: center; border: 1px solid transparent; }
+        .member-item:hover { background: rgba(255,255,255,0.03); }
+        .member-item.selected { background: rgba(52, 152, 219, 0.1); border-color: rgba(52, 152, 219, 0.3); }
+        
+        .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+        .online { background: #2ecc71; box-shadow: 0 0 10px #2ecc71; }
+        .offline { background: #e74c3c; }
+        
+        .control-section { flex: 1; display: flex; flex-direction: column; gap: 15px; }
+        .leader-panel { background: rgba(0,0,0,0.4); border-radius: 15px; border: 1px solid rgba(255,255,255,0.03); padding: 20px; display: none; overflow-y: auto; }
+        .leader-panel h3 { margin: 0 0 15px 0; color: #f1c40f; font-size: 14px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+        .leader-panel::-webkit-scrollbar { width: 4px; }
+        .leader-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        
+        .btn { width: 100%; padding: 12px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; color: white; transition: 0.2s; font-size: 12px; margin-bottom: 10px; text-transform: uppercase; }
+        .btn:hover { filter: brightness(1.2); transform: translateY(-2px); }
+        .btn-blue { background: #2980b9; } .btn-green { background: #27ae60; } .btn-orange { background: #d35400; } .btn-red { background: #c0392b; } .btn-purple { background: #8e44ad; }
+        
+        .modern-input { width: 100%; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; outline: none; box-sizing: border-box; margin-bottom: 10px; }
+        .modern-input:focus { border-color: #3498db; }
+        #selected-member-name { color: white; font-size: 16px; margin-bottom: 15px; text-align: center; }
+        
+        .chat-container { flex: 1; display: flex; flex-direction: column; background: rgba(0,0,0,0.4); border-radius: 15px; border: 1px solid rgba(255,255,255,0.03); overflow: hidden; }
+        .chat-messages { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .chat-msg { background: rgba(255,255,255,0.05); padding: 10px 15px; border-radius: 10px; font-size: 13px; line-height: 1.4; width: fit-content; max-width: 80%; }
+        .chat-msg span { color: #3498db; font-weight: bold; margin-right: 5px; }
+        .chat-input-area { display: flex; padding: 15px; background: rgba(0,0,0,0.5); border-top: 1px solid rgba(255,255,255,0.05); gap: 10px; }
+        .chat-input-area input { flex: 1; margin: 0; }
+        .chat-input-area button { width: 100px; margin: 0; }
+        
+        .settings-container { flex: 1; display: flex; gap: 20px; overflow-y: auto; }
+        .ranks-setup { flex: 2; background: rgba(0,0,0,0.4); padding: 20px; border-radius: 15px; }
+        .motd-setup { flex: 1; background: rgba(0,0,0,0.4); padding: 20px; border-radius: 15px; }
+        .rank-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
+        .rank-row span { width: 30px; font-weight: bold; color: #888; }
+        .rank-row input { margin: 0; flex: 1; }
+
+        .custom-select-wrapper { position: relative; margin-bottom: 10px; width: 100%; font-family: 'Inter', sans-serif; }
+        .custom-select-btn { background: rgba(0,0,0,0.5); padding: 12px 15px; color: white; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
+        .custom-select-btn:hover { border-color: #8e44ad; background: rgba(142, 68, 173, 0.1); }
+        .custom-select-arrow { font-size: 10px; color: #888; transition: 0.3s; }
+        .custom-select-list { position: absolute; top: 100%; left: 0; right: 0; background: rgba(20, 20, 28, 0.98); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; margin-top: 5px; z-index: 9999; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.8); display: none; }
+        .custom-select-list.show { display: block; }
+        .custom-select-item { padding: 12px 15px; color: #ddd; font-size: 13px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.2s; }
+        .custom-select-item:last-child { border-bottom: none; }
+        .custom-select-item:hover { background: rgba(142, 68, 173, 0.3); color: white; padding-left: 20px; }
+    </style>
+</head>
+<body>
+    <div class="faction-window">
+        <button class="close-btn" onclick="mta.triggerEvent('cef:f3Kapat')">✕</button>
+        
+        <div class="header">
+            <div class="faction-info">
+                <h1 id="faction-name">Yükleniyor...</h1>
+                <p>Departman Kontrol Merkezi</p>
+            </div>
+            <div class="bank-info">
+                <span>Birlik Kasası</span>
+                <h3 id="faction-bank">$0</h3>
+            </div>
+        </div>
+
+        <div class="global-motd">
+            <div class="motd-icon">📢</div>
+            <div class="motd-content">
+                <div class="motd-title">BİRLİK DUYURUSU (NOTU)</div>
+                <div class="motd-text" id="motd-display">Yükleniyor...</div>
+            </div>
+        </div>
+
+        <div class="tab-menu">
+            <div class="tab-btn active" onclick="switchTab('tab-members')">Personel Yönetimi</div>
+            <div class="tab-btn" onclick="switchTab('tab-vehicles')">Birlik Araçları</div>
+            <div class="tab-btn" onclick="switchTab('tab-chat')">Birlik Sohbeti</div>
+            <div class="tab-btn" id="tab-btn-settings" style="display:none;" onclick="switchTab('tab-settings')">Birlik Ayarları</div>
+        </div>
+
+        <div class="tab-content active" id="tab-members">
+            <div class="members-section">
+                <div class="list-header">
+                    <div class="col-name">Personel Adı</div>
+                    <div class="col-rank">Rütbe / Maaş</div>
+                    <div class="col-status">Durum</div>
+                </div>
+                <div class="member-list" id="member-list"></div>
+            </div>
+
+            <div class="control-section">
+                <div class="leader-panel" id="leader-panel">
+                    <h3>Personel Yönetimi</h3>
+                    <div id="selected-member-name" style="color:#aaa; font-size:13px;">Listeden bir personel seçin</div>
+                    <button class="btn btn-green" onclick="factionAction('terfi')">Rütbe Yükselt</button>
+                    <button class="btn btn-orange" onclick="factionAction('dusur')">Rütbe Düşür</button>
+                    <button class="btn btn-red" onclick="factionAction('at')">Birlikten İhraç Et</button>
+                    
+                    <h3 style="margin-top: 20px;">Mesai (Duty) Ataması</h3>
+                    <div class="custom-select-wrapper" id="duty-wrapper">
+                        <div class="custom-select-btn" onclick="toggleDutyMenu()">
+                            <span id="duty-selected-text">Mesaiyi İptal Et (Sivil)</span>
+                            <span class="custom-select-arrow">▼</span>
+                        </div>
+                        <div class="custom-select-list" id="duty-dropdown">
+                            </div>
+                    </div>
+                    <input type="hidden" id="duty-type" value="0">
+                    
+                    <button class="btn btn-purple" onclick="giveDuty()">Seçili Görevi Ver</button>
+
+                    <h3 style="margin-top: 20px;">İşe Alım / Davet</h3>
+                    <input type="text" id="invite-name" class="modern-input" placeholder="Yakındaki Oyuncu İsmi">
+                    <button class="btn btn-blue" onclick="invitePlayer()">Birliğe Davet Et</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="tab-vehicles">
+            <div class="members-section" style="flex: 1;">
+                <div class="list-header">
+                    <div class="col-name">Araç Modeli</div>
+                    <div class="col-rank">Plaka</div>
+                    <div class="col-minrank">Zorunlu Rütbe</div> <div class="col-status" style="width: 150px;">Durum</div>
+                </div>
+                <div class="member-list" id="vehicle-list">
+                    <div style="color:#666; text-align:center; padding:20px;">Araçlar yükleniyor...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="tab-chat">
+            <div class="chat-container">
+                <div class="chat-messages" id="chat-box"></div>
+                <div class="chat-input-area">
+                    <input type="text" id="chat-input" class="modern-input" placeholder="Birliğe mesaj gönder..." onkeypress="if(event.key === 'Enter') sendChatMessage()">
+                    <button class="btn btn-blue" onclick="sendChatMessage()">Gönder</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="tab-settings">
+            <div class="settings-container">
+                <div class="ranks-setup">
+                    <h3 style="color:#f1c40f; margin-top:0;">Rütbe ve Maaş Ayarları</h3>
+                    <div id="ranks-container"></div>
+                    <button id="save-ranks-btn" class="btn btn-green" style="margin-top:15px;" onclick="saveRanks()">Rütbeleri Kaydet</button>
+                </div>
+                <div class="motd-setup">
+                    <h3 style="color:#3498db; margin-top:0;">Birlik Duyurusunu Düzenle</h3>
+                    <textarea id="motd-input" class="modern-input" style="height: 150px; resize: none;" placeholder="Tüm üyelerin göreceği duyuruyu buraya yazın..."></textarea>
+                    <button id="save-motd-btn" class="btn btn-blue" onclick="saveMOTD()">Duyuruyu Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedMemberID = null;
+        let currentDutyNames = ["Mesaiyi İptal Et (Sivil)"];
+
+        function toggleDutyMenu() {
+            document.getElementById('duty-dropdown').classList.toggle('show');
+        }
+
+        function selectDuty(val, text) {
+            document.getElementById('duty-type').value = val;
+            document.getElementById('duty-selected-text').innerText = text;
+            document.getElementById('duty-dropdown').classList.remove('show');
+        }
+
+        document.addEventListener('click', function(e) {
+            let wrapper = document.getElementById('duty-wrapper');
+            if (wrapper && !wrapper.contains(e.target)) {
+                document.getElementById('duty-dropdown').classList.remove('show');
+            }
+        });
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            if(tabId === 'tab-chat') { let cb = document.getElementById('chat-box'); cb.scrollTop = cb.scrollHeight; }
+        }
+
+        // YENİ: fID ve dutiesJSON parametreleri eklendi
+        function loadFactionData(fID, factionName, bank, rank, motd, ranksJSON, membersJSON, chatJSON, vehJSON, dutiesJSON) {
+            document.getElementById('faction-name').innerText = factionName;
+            document.getElementById('faction-bank').innerText = "$" + bank.toLocaleString();
+            document.getElementById('motd-display').innerText = motd;
+            document.getElementById('motd-input').value = motd;
+            
+            let myRank = parseInt(rank);
+            if (myRank >= 9) {
+                document.getElementById('leader-panel').style.display = 'block';
+                document.getElementById('tab-btn-settings').style.display = 'block';
+            }
+
+            // YENİ: Gelen görevleri al ve listeyi oluştur
+            let dutiesData = JSON.parse(dutiesJSON);
+            while (Array.isArray(dutiesData) && dutiesData.length === 1 && Array.isArray(dutiesData[0])) { dutiesData = dutiesData[0]; }
+            
+            currentDutyNames = ["Mesaiyi İptal Et (Sivil)"];
+            if(dutiesData) { dutiesData.forEach(d => currentDutyNames.push(d)); }
+
+            let dropHTML = `<div class="custom-select-item" onclick="selectDuty(0, 'Mesaiyi İptal Et (Sivil)')">Mesaiyi İptal Et (Sivil)</div>`;
+            for(let i=1; i<currentDutyNames.length; i++) {
+                dropHTML += `<div class="custom-select-item" onclick="selectDuty(${i}, '${currentDutyNames[i]}')">${currentDutyNames[i]}</div>`;
+            }
+            document.getElementById('duty-dropdown').innerHTML = dropHTML;
+
+            let ranksData = JSON.parse(ranksJSON);
+            while (Array.isArray(ranksData) && ranksData.length === 1 && Array.isArray(ranksData[0])) { ranksData = ranksData[0]; }
+            let ranksHTML = "";
+            for(let i=1; i<=10; i++) {
+                let r = ranksData[i-1];
+                let rName = r ? r.name : `Rütbe ${i}`;
+                let rSal = r ? r.salary : 0;
+                ranksHTML += `
+                    <div class="rank-row">
+                        <span>${i}.</span>
+                        <input type="text" id="r_name_${i}" class="modern-input" value="${rName}" placeholder="Rütbe Adı">
+                        <input type="number" id="r_sal_${i}" class="modern-input" value="${rSal}" placeholder="Maaş ($)">
+                    </div>
+                `;
+            }
+            document.getElementById('ranks-container').innerHTML = ranksHTML;
+
+            let list = document.getElementById('member-list');
+            try {
+                let data = JSON.parse(membersJSON);
+                while (Array.isArray(data) && data.length === 1 && Array.isArray(data[0])) { data = data[0]; }
+                list.innerHTML = data.length ? '' : '<div style="color:#666; text-align:center; padding:20px;">Kayıtlı personel bulunamadı.</div>';
+                data.forEach(m => {
+                    let div = document.createElement('div');
+                    div.className = 'member-item';
+                    let statusClass = m.online ? 'online' : 'offline';
+                    div.innerHTML = `
+                        <div class="col-name" style="color: ${m.online ? 'white' : '#888'}; font-weight: 600;">${m.name}</div>
+                        <div class="col-rank" style="color: #3498db; font-size: 12px;">${m.rankName} <br><span style="color:#2ecc71;">$${m.salary}</span></div>
+                        <div class="col-status"><span class="status-dot ${statusClass}"></span></div>
+                    `;
+                    div.onclick = () => {
+                        selectedMemberID = m.charID;
+                        document.querySelectorAll('.member-item').forEach(el => el.classList.remove('selected'));
+                        div.classList.add('selected');
+                        
+                        document.getElementById('selected-member-name').innerHTML = `
+                            <b style="color:white; font-size:16px;">${m.name}</b><br>
+                            <span style="color:#f1c40f; font-size:12px;">${m.rankName}</span>
+                        `;
+
+                        document.getElementById('duty-selected-text').innerText = currentDutyNames[m.duty] || "Bilinmiyor";
+                        document.getElementById('duty-type').value = m.duty; 
+                    };
+                    list.appendChild(div);
+                });
+            } catch(e) {}
+
+            let vehList = document.getElementById('vehicle-list');
+            try {
+                let vData = JSON.parse(vehJSON);
+                while (Array.isArray(vData) && vData.length === 1 && Array.isArray(vData[0])) { vData = vData[0]; }
+                vehList.innerHTML = vData.length ? '' : '<div style="color:#666; text-align:center; padding:20px;">Birliğinize ait araç bulunmuyor.</div>';
+                
+                vData.forEach(v => {
+                    let div = document.createElement('div');
+                    div.className = 'member-item';
+                    div.style.cursor = 'default'; 
+                    
+                    let statusText = v.spawned ? '<span style="color:#e74c3c;">Dışarıda</span>' : '<span style="color:#2ecc71;">Garajda</span>';
+                    let rankHTML = (myRank >= 9) 
+                        ? `<input type="number" class="modern-input" style="padding:5px; margin:0; width:60px; text-align:center; font-weight:bold; color:#f1c40f;" value="${v.minRank}" min="1" max="10" onchange="changeVehRank(${v.id}, this.value)">` 
+                        : `<span style="color:#f1c40f; font-weight:bold;">${v.minRank}</span>`;
+
+                    div.innerHTML = `
+                        <div class="col-name" style="color: white; font-weight: 600;">${v.modelName} <span style="color:#888; font-size:11px;">(ID: ${v.id})</span></div>
+                        <div class="col-rank" style="color: #888; font-weight: bold; letter-spacing: 1px;">${v.plate}</div>
+                        <div class="col-minrank">${rankHTML}</div>
+                        <div class="col-status" style="width: 150px;">${statusText}</div>
+                    `;
+                    vehList.appendChild(div);
+                });
+            } catch(e) {}
+
+            let chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML = "";
+            let chats = JSON.parse(chatJSON);
+            chats.forEach(c => appendMessage(c.sender, c.msg));
+        }
+
+        function changeVehRank(vehID, newRank) { mta.triggerEvent("cef:aracRutbeKaydet", vehID, newRank); }
+
+        function appendMessage(sender, msg) {
+            let chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML += `<div class="chat-msg"><span>${sender}:</span> ${msg}</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function factionAction(action) {
+            if (!selectedMemberID) return;
+            mta.triggerEvent("cef:birlikIslem", selectedMemberID, action);
+        }
+        
+        function giveDuty() {
+            if (!selectedMemberID) return;
+            let dType = document.getElementById('duty-type').value;
+            mta.triggerEvent("cef:dutyVer", selectedMemberID, parseInt(dType));
+        }
+        
+        function invitePlayer() {
+            let val = document.getElementById('invite-name').value;
+            if (val.length < 3) return;
+            mta.triggerEvent("cef:birlikDavet", val);
+            document.getElementById('invite-name').value = "";
+        }
+        
+        function saveMOTD() {
+            let btn = document.getElementById('save-motd-btn');
+            btn.innerText = "KAYDEDİLİYOR...";
+            btn.style.background = "#f39c12"; 
+            mta.triggerEvent("cef:motdKaydet", document.getElementById('motd-input').value);
+            setTimeout(() => { btn.innerText = "DUYURUYU KAYDET"; btn.style.background = "#2980b9"; }, 1000);
+        }
+
+        function saveRanks() {
+            let btn = document.getElementById('save-ranks-btn');
+            btn.innerText = "KAYDEDİLİYOR...";
+            btn.style.background = "#f39c12"; 
+            
+            mta.triggerEvent("cef:rutbeleriKaydet",
+                document.getElementById('r_name_1').value, parseInt(document.getElementById('r_sal_1').value) || 0,
+                document.getElementById('r_name_2').value, parseInt(document.getElementById('r_sal_2').value) || 0,
+                document.getElementById('r_name_3').value, parseInt(document.getElementById('r_sal_3').value) || 0,
+                document.getElementById('r_name_4').value, parseInt(document.getElementById('r_sal_4').value) || 0,
+                document.getElementById('r_name_5').value, parseInt(document.getElementById('r_sal_5').value) || 0,
+                document.getElementById('r_name_6').value, parseInt(document.getElementById('r_sal_6').value) || 0,
+                document.getElementById('r_name_7').value, parseInt(document.getElementById('r_sal_7').value) || 0,
+                document.getElementById('r_name_8').value, parseInt(document.getElementById('r_sal_8').value) || 0,
+                document.getElementById('r_name_9').value, parseInt(document.getElementById('r_sal_9').value) || 0,
+                document.getElementById('r_name_10').value, parseInt(document.getElementById('r_sal_10').value) || 0
+            );
+            setTimeout(() => { btn.innerText = "RÜTBELERİ KAYDET"; btn.style.background = "#27ae60"; }, 1000);
+        }
+
+        function sendChatMessage() {
+            let input = document.getElementById('chat-input');
+            let text = input.value.trim();
+            if(text.length > 0) {
+                mta.triggerEvent("cef:chatGonder", text);
+                input.value = "";
+            }
+        }
+    </script>
+</body>
+</html>

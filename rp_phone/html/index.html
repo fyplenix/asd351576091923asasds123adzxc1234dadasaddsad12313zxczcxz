@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="phone-container" id="smartphone">
+        <div class="phone-notch">
+            <div class="camera-lens"></div>
+        </div>
+
+        <div class="status-bar">
+            <div class="time" id="clock">12:00</div>
+            <div class="icons">
+                <svg viewBox="0 0 512 512"><path d="M499.1 6.3c8.1 6 12.9 15.6 12.9 25.7v448c0 17.7-14.3 32-32 32H32C14.3 512 0 497.7 0 480c0-10.1 4.8-19.7 12.9-25.7l448-336c13.7-10.3 33.6-2.5 38.2 14z"/></svg>
+                <svg viewBox="0 0 640 512"><path d="M54.2 202.9C123.2 136.7 216.8 96 320 96s196.8 40.7 265.8 106.9c12.8 12.2 33 11.8 45.2-.9s11.8-33-.9-45.2C549.7 79.5 440.4 32 320 32S90.3 79.5 9.8 156.7C-2.9 169-3.3 189.2 8.9 201.4s32.4 13.7 45.2 1.5zM320 192c-76.3 0-146.9 26.6-203.2 71c-13.6 10.7-16 30.4-5.4 44s30.4 16 44 5.4C201.2 276.5 258 256 320 256s118.8 20.5 164.6 56.5c13.6 10.7 33.4 8.3 44-5.4s8.3-33.4-5.4-44C466.9 218.6 396.3 192 320 192zm0 128c-35.4 0-68.4 12.2-94.8 32.5c-14.1 10.8-16.8 31-6 45s31 16.8 45 6c16-12.3 35.3-19.5 55.8-19.5s39.8 7.2 55.8 19.5c14.1 10.8 34.2 8.2 45-6s8.2-34.2-6-45C388.4 332.2 355.4 320 320 320zM256 448a64 64 0 1 0 128 0 64 64 0 1 0 -128 0z"/></svg>
+                <svg viewBox="0 0 576 512"><path d="M80 160c-8.8 0-16 7.2-16 16V336c0 8.8 7.2 16 16 16H400c8.8 0 16-7.2 16-16V176c0-8.8-7.2-16-16-16H80zM0 176c0-44.2 35.8-80 80-80H400c44.2 0 80 35.8 80 80v16h64c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H480v16c0 44.2-35.8 80-80 80H80c-44.2 0-80-35.8-80-80V176z"/></svg>
+            </div>
+        </div>
+
+        <div class="screen" id="home-screen">
+            <div class="app-grid">
+                <div class="app-icon" onclick="openApp('bank-app')">
+                    <div class="icon-bg bank-bg"><svg viewBox="0 0 512 512" width="28" height="28" fill="white"><path d="M471.6 21.7c-21.9-15-52.1-16-75-2.2l-320 192C52.4 225.9 32 253.2 32 284.1v147.9c0 44.2 35.8 80 80 80h288c44.2 0 80-35.8 80-80v-304c0-43.2-22.3-81.9-60.8-106.3zM112 448c-8.8 0-16-7.2-16-16V284.1c0-10.2 6.8-19.3 16.5-24.3l320-192c8.2-4.9 18.7-4.3 26.2 1.4c7.6 5.8 11.3 15.3 11.3 25v304c0 8.8-7.2 16-16 16H112z"/></svg></div>
+                    <span class="app-name">LS Bank</span>
+                </div>
+                <div class="app-icon" onclick="alert('Bu uygulama yapım aşamasında.')">
+                    <div class="icon-bg msg-bg"><svg viewBox="0 0 512 512" width="28" height="28" fill="white"><path d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"/></svg></div>
+                    <span class="app-name">Mesajlar</span>
+                </div>
+                <div class="app-icon" onclick="openApp('contacts-app')">
+                    <div class="icon-bg contacts-bg"><svg viewBox="0 0 448 512" width="24" height="24" fill="white"><path d="M224 256a128 128 0 1 0 0-256 128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg></div>
+                    <span class="app-name">Rehber</span>
+                </div>
+                <div class="app-icon" onclick="openApp('casino-app')">
+                    <div class="icon-bg casino-bg"><svg viewBox="0 0 512 512" width="26" height="26" fill="white"><path d="M480 160H32c-17.7 0-32 14.3-32 32v224c0 17.7 14.3 32 32 32h448c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zM128 368c-26.5 0-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48zm128 0c-26.5 0-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48zm128 0c-26.5 0-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48zM416 32H96C78.3 32 64 46.3 64 64v64h384V64c0-17.7-14.3-32-32-32z"/></svg></div>
+                    <span class="app-name">Casino</span>
+                </div>
+                <div class="app-icon" onclick="openApp('camera-app')">
+                    <div class="icon-bg camera-bg">
+                        <svg viewBox="0 0 512 512" width="26" height="26" fill="white"><path d="M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/></svg>
+                    </div>
+                    <span class="app-name">Kamera</span>
+                </div>
+                <div class="app-icon" onclick="openApp('gallery-app')">
+                    <div class="icon-bg gallery-bg">
+                        <svg viewBox="0 0 512 512" width="26" height="26" fill="white"><path d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6h336c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>
+                    </div>
+                    <span class="app-name">Galeri</span>
+                </div>
+                <div class="app-icon" onclick="openApp('calculator-app')">
+                    <div class="icon-bg" style="background: linear-gradient(135deg, #f39c12, #e67e22);"><span style="font-size: 22px; color: white; font-weight: bold;">±</span></div>
+                    <span class="app-name">Hesap Mak.</span>
+                </div>
+                <div class="app-icon" onclick="openApp('weather-app')">
+                    <div class="icon-bg" style="background: linear-gradient(135deg, #3498db, #2980b9);"><span style="font-size: 24px;">☁️</span></div>
+                    <span class="app-name">Hava Durumu</span>
+                </div>
+                <div class="app-icon" onclick="openApp('sahibinden-app')">
+                    <div class="icon-bg sahibinden-bg">
+                        <svg viewBox="0 0 512 512" width="26" height="26" fill="#333"><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>
+                    </div>
+                    <span class="app-name">Sahibinden</span>
+                </div>
+                <div class="app-icon" onclick="openApp('settings-app')">
+                    <div class="icon-bg settings-bg"><svg viewBox="0 0 512 512" width="26" height="26" fill="white"><path d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"/></svg></div>
+                    <span class="app-name">Ayarlar</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="screen app-screen" id="bank-app" style="display: none;">
+            <div class="app-header">LS Bankası</div>
+            <div class="app-content scrollable">
+                <p class="welcome-text">Hoş Geldin,</p>
+                <h2 id="bank-user-name" class="user-name">Yükleniyor...</h2>
+                <div class="credit-card">
+                    <div class="card-top">
+                        <span class="card-label">VADESİZ HESAP</span>
+                        <svg viewBox="0 0 384 512" width="20" height="20" fill="rgba(255,255,255,0.5)"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM96 64H288c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32zm32 160a32 32 0 1 1 -64 0 32 32 0 1 1 64 0z"/></svg>
+                    </div>
+                    <div class="card-middle">
+                        <span class="balance-symbol">$</span>
+                        <span id="bank-balance" class="balance-amount">0</span>
+                    </div>
+                    <div class="card-bottom">
+                        <span class="card-label">IBAN:</span>
+                        <span id="bank-iban" class="iban-text">TR-----</span>
+                    </div>
+                </div>
+                <div class="transfer-section">
+                    <h3>Para Transferi</h3>
+                    <div class="input-group">
+                        <input type="text" id="targetIban" placeholder="Alıcı IBAN (Örn: TR123456)">
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="transferAmount" placeholder="Miktar ($)">
+                    </div>
+                    <button class="action-btn gold-btn" onclick="sendTransfer()">Gönder</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="screen app-screen" id="contacts-app" style="display: none;">
+            <div class="app-header">Kişiler</div>
+            <div class="app-content scrollable">
+                <div class="transfer-section">
+                    <h3>Yeni Kişi Ekle</h3>
+                    <div class="input-group">
+                        <input type="text" id="contactName" placeholder="İsim Soyisim">
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="contactNumber" placeholder="Numara (0999...)">
+                    </div>
+                    <button class="action-btn blue-btn" onclick="addContact()">Rehbere Kaydet</button>
+                </div>
+                <h3 style="color:white; font-size:14px; margin-top:20px; border-bottom:1px solid #333; padding-bottom:5px;">Kayıtlı Kişiler</h3>
+                <div id="contact-list" class="contact-list">
+                    <div class="contact-item"><span style="color:#888;">Rehber Yükleniyor...</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="screen app-screen" id="settings-app" style="display: none;">
+            <div class="app-header">Ayarlar</div>
+            <div class="app-content scrollable">
+                <div class="transfer-section">
+                    <h3>Duvar Kağıdı Seçimi</h3>
+                    <div class="wallpaper-grid">
+                        <div class="wall-item" style="background-image: url('wp1.png');" onclick="changeWallpaper('wp1.png')"></div>
+                        <div class="wall-item" style="background-image: url('wp2.png');" onclick="changeWallpaper('wp2.png')"></div>
+                        <div class="wall-item" style="background-image: url('wp3.png');" onclick="changeWallpaper('wp3.png')"></div>
+                    </div>
+                </div>
+                <div class="transfer-section" style="margin-top: 20px;">
+                    <h3>Zil Sesi Seçimi</h3>
+                    <div class="input-group">
+                        <select id="ringtoneSelect" onchange="changeRingtone(this.value)">
+                            <option value="zil1.mp3">Klasik Telefon Sesi</option>
+                            <option value="zil2.mp3">Marimba Ritim</option>
+                            <option value="zil3.mp3">Elektronik Bass</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="transfer-section" style="margin-top: 20px; text-align: center;">
+                    <h3 style="color: #888; font-size: 12px; text-transform: uppercase;">Cihaz Bilgisi</h3>
+                    <div style="background: #1e1e1e; padding: 15px; border-radius: 10px; border: 1px solid #333;">
+                        <span style="color: white; font-weight: bold;">Telefon No: </span>
+                        <span id="my-phone-number" style="color: #E4C000; font-weight: bold; letter-spacing: 1px;">Yükleniyor...</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="screen app-screen" id="casino-app" style="display: none; background: #1a0505;">
+            <div class="app-header" style="border-bottom:1px solid #ff4757; color:#ff4757;">Diamond Casino</div>
+            <div class="app-content scrollable">
+                <div style="text-align:center; padding: 10px 0;">
+                    <h2 style="color:white; margin:10px 0 5px 0;">Casino Bakiye</h2>
+                    <h1 style="color:#E4C000; margin:0 0 10px 0;">$<span id="casino-balance">0</span></h1>
+                </div>
+                
+                <div class="transfer-section" style="margin-bottom: 20px;">
+                    <div class="input-group" style="display:flex; gap:10px;">
+                        <input type="number" id="casinoAmount" placeholder="Miktar ($)" style="flex:1;">
+                    </div>
+                    <div style="display:flex; gap:10px;">
+                        <button class="action-btn blue-btn" onclick="casinoDeposit()">Bankadan Yatır</button>
+                        <button class="action-btn dark-btn" onclick="casinoWithdraw()">Bankaya Çek</button>
+                    </div>
+                </div>
+
+                <div class="slot-machine">
+                    <div class="slot-reels">
+                        <div class="reel" id="reel1">🍒</div>
+                        <div class="reel" id="reel2">💎</div>
+                        <div class="reel" id="reel3">🍋</div>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-top:15px; align-items:center;">
+                        <div>
+                            <span style="color:white; font-size:11px;">Bahis Seç:</span>
+                            <div class="bet-buttons">
+                                <button class="bet-btn active" onclick="setBet(100, this)">100$</button>
+                                <button class="bet-btn" onclick="setBet(500, this)">500$</button>
+                                <button class="bet-btn" onclick="setBet(1000, this)">1K$</button>
+                            </div>
+                        </div>
+                        <button class="action-btn red-btn" style="width: 110px; margin:0;" onclick="spinSlot()">🎰 ÇEVİR</button>
+                    </div>
+                    <p id="slot-message" style="text-align:center; color:#888; font-size:12px; margin-top:10px;">Kazanmak için 3 aynı simgeyi tuttur!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="screen" id="call-screen" style="display: none; background: rgba(20,20,20,0.95); z-index: 200;">
+            <div style="text-align: center; margin-top: 80px;">
+                <h2 id="caller-name" style="color: white; font-size: 24px; margin-bottom: 5px;">Bilinmeyen Numara</h2>
+                <p id="call-status" style="color: #888; font-size: 14px;">Aranıyor...</p>
+                <div id="call-timer" style="color: #E4C000; font-size: 30px; margin-top: 30px; font-weight: bold; display:none;">00:00</div>
+            </div>
+            
+            <div class="call-buttons" style="position: absolute; bottom: 80px; width: 100%; display: flex; justify-content: space-around; padding: 0 40px; box-sizing: border-box;">
+                <button id="btn-decline" class="action-btn red-btn" style="width: 60px; height: 60px; border-radius: 50%; font-size: 24px; display:flex; justify-content:center; align-items:center;" onclick="declineCall()">✖</button>
+                <button id="btn-answer" class="action-btn msg-bg" style="width: 60px; height: 60px; border-radius: 50%; font-size: 24px; color:white; display:flex; justify-content:center; align-items:center;" onclick="answerCall()">📞</button>
+            </div>
+        </div>
+
+        <div class="screen app-screen" id="camera-app" style="display: none; background: transparent; padding:0;">
+            <div id="camera-viewfinder" style="position:absolute; width:100%; height:100%; box-sizing:border-box; border: 2px solid rgba(255,255,255,0.3);">
+                <div style="position:absolute; top:20%; left:10%; width:20px; height:20px; border-top:2px solid white; border-left:2px solid white;"></div>
+                <div style="position:absolute; top:20%; right:10%; width:20px; height:20px; border-top:2px solid white; border-right:2px solid white;"></div>
+                <div style="position:absolute; bottom:25%; left:10%; width:20px; height:20px; border-bottom:2px solid white; border-left:2px solid white;"></div>
+                <div style="position:absolute; bottom:25%; right:10%; width:20px; height:20px; border-bottom:2px solid white; border-right:2px solid white;"></div>
+            </div>
+            <div style="position:absolute; bottom: 30px; width:100%; display:flex; justify-content:center; align-items:center;">
+                <button onclick="takePhoto()" style="width:70px; height:70px; background:rgba(255,255,255,0.8); border:5px solid white; border-radius:50%; cursor:pointer; outline:none; transition:0.2s; box-shadow:0 0 15px rgba(0,0,0,0.5);"></button>
+            </div>
+            <div id="camera-flash" style="position:absolute; top:0; left:0; width:100%; height:100%; background:white; opacity:0; pointer-events:none; z-index:999; transition: opacity 0.1s;"></div>
+        </div>
+
+        <div class="screen app-screen" id="gallery-app" style="display: none;">
+            <div class="app-header">Film Rulosu</div>
+            <div class="app-content scrollable" style="padding:10px;">
+                <div class="gallery-grid" id="gallery-container">
+                    <p style="color:#888; text-align:center; width:100%; margin-top:20px;">Fotoğraf yükleniyor...</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="photo-viewer" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:300; flex-direction:column; justify-content:center; align-items:center;">
+            <button onclick="closePhotoViewer()" style="position:absolute; top:40px; right:20px; background:none; border:none; color:white; font-size:24px; cursor:pointer;">✕</button>
+            <img id="viewer-img" src="" style="max-width:90%; max-height:70%; border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
+            <button class="action-btn red-btn" style="width:80%; margin-top:30px;" onclick="deleteCurrentPhoto()">🗑 Fotoğrafı Sil</button>
+        </div>
+
+        <div class="screen app-screen" id="sahibinden-app" style="display: none; background: #f5f5f5;">
+            <div class="app-header" style="background:#ffe600; color:#333; font-weight:900;">sahibinden</div>
+            
+            <div style="display:flex; background:white; border-bottom:1px solid #ddd;">
+                <button id="tab-ilanlar" class="shb-tab active" onclick="switchShbTab('ilanlar')">İlanlar</button>
+                <button id="tab-ilanlarim" class="shb-tab" onclick="switchShbTab('ilanlarim')">İlanlarım</button>
+            </div>
+            
+            <div id="shb-content" class="app-content scrollable" style="padding:10px;">
+                </div>
+        </div>
+
+
+<div class="screen app-screen" id="calculator-app" style="display: none; background: #000;">
+    <div class="app-header" style="border-bottom:none;">Hesap Makinesi</div>
+    <div id="calc-display" style="height:120px; color:white; font-size:48px; display:flex; align-items:flex-end; justify-content:flex-end; padding:20px; box-sizing:border-box; overflow:hidden;">0</div>
+    <div class="calc-buttons">
+        <button class="calc-btn gray" onclick="calcClear()">AC</button>
+        <button class="calc-btn gray" onclick="calcDelete()">C</button>
+        <button class="calc-btn gray" onclick="appendSymbol('%')">%</button>
+        <button class="calc-btn orange" onclick="appendSymbol('/')">÷</button>
+        <button class="calc-btn dark" onclick="appendNumber('7')">7</button>
+        <button class="calc-btn dark" onclick="appendNumber('8')">8</button>
+        <button class="calc-btn dark" onclick="appendNumber('9')">9</button>
+        <button class="calc-btn orange" onclick="appendSymbol('*')">×</button>
+        <button class="calc-btn dark" onclick="appendNumber('4')">4</button>
+        <button class="calc-btn dark" onclick="appendNumber('5')">5</button>
+        <button class="calc-btn dark" onclick="appendNumber('6')">6</button>
+        <button class="calc-btn orange" onclick="appendSymbol('-')">-</button>
+        <button class="calc-btn dark" onclick="appendNumber('1')">1</button>
+        <button class="calc-btn dark" onclick="appendNumber('2')">2</button>
+        <button class="calc-btn dark" onclick="appendNumber('3')">3</button>
+        <button class="calc-btn orange" onclick="appendSymbol('+')">+</button>
+        <button class="calc-btn dark double" onclick="appendNumber('0')">0</button>
+        <button class="calc-btn dark" onclick="appendNumber('.')">.</button>
+        <button class="calc-btn orange" onclick="calculateResult()">=</button>
+    </div>
+</div>
+
+<div class="screen app-screen" id="weather-app" style="display: none; background: linear-gradient(180deg, #4A90E2 0%, #003366 100%); color: white; padding: 0;">
+    
+    <div class="weather-top" style="text-align: center; margin-top: 50px; text-shadow: 0 1px 5px rgba(0,0,0,0.3);">
+        <h2 id="w-city" style="font-size: 32px; font-weight: 400; margin: 0;">Los Santos</h2>
+        <h1 id="w-temp" style="font-size: 85px; font-weight: 200; margin: -5px 0 -10px 0;">--°</h1>
+        <p id="w-desc" style="font-size: 18px; font-weight: 500; margin: 0;">Yükleniyor...</p>
+        <p id="w-range" style="font-size: 16px; font-weight: 500; margin: 5px 0 0 0;">Y:--° D:--°</p>
+    </div>
+    
+    <div class="weather-content scrollable" style="padding: 0 20px; margin-top: 40px; height: calc(100% - 240px);">
+        <div class="weather-widget">
+            <p id="w-summary" class="weather-summary">Veriler alınıyor...</p>
+            <div class="weather-hourly" id="weather-hourly-list">
+                </div>
+        </div>
+
+        <div class="weather-widget">
+            <p class="widget-title">🗓 3 GÜNLÜK TAHMİN</p>
+            <div id="weather-daily-list" style="display: flex; flex-direction: column; gap: 10px;">
+                </div>
+        </div>
+    </div>
+</div>
+
+        <div id="gallery-picker-modal" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:400; flex-direction:column;">
+            <div style="padding:15px; color:white; text-align:center; font-weight:bold; border-bottom:1px solid #333;">
+                Fotoğraf Seç
+                <button onclick="closeGalleryPicker()" style="float:right; background:none; border:none; color:white; font-size:16px; cursor:pointer;">✕</button>
+            </div>
+            
+            <div id="gallery-picker-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; padding: 10px; overflow-y: auto; align-content: start;">
+                </div>
+        </div>
+
+        <div class="home-indicator" onclick="goHomeOrClose()"></div>
+    </div>
+    
+    <div class="close-overlay" onclick="closePhone()"></div>
+    <script src="script.js"></script>
+</body>
+</html>
