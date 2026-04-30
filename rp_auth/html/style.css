@@ -1,0 +1,146 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: transparent; /* Arka planı MTA gösterecek */
+    overflow: hidden;
+    color: white;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.container {
+    background: rgba(0, 0, 0, 0.8); /* Saydam siyah */
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 350px;
+}
+
+.title { margin: 0 0 10px 0; font-size: 24px; }
+.subtitle { margin: 0 0 25px 0; font-size: 14px; color: #aaa; }
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    box-sizing: border-box; /* Padding dahil genişlik */
+}
+
+.info-text { font-size: 11px; color: #777; margin-top: -5px; margin-bottom: 15px; }
+
+.skin-selection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 15px;
+}
+
+.skin-img { height: 100px; border-radius: 10px; }
+
+.skin-btn {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.skin-btn:hover { background: #555; }
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.submit-btn:hover { background: #2ecc71; }
+
+.input-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.input-row input {
+    width: 30%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    box-sizing: border-box;
+    text-align: center;
+}
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background: rgba(255, 255, 255, 0.05);
+    color: white; 
+    cursor: pointer;
+}
+
+select:disabled {
+    background: rgba(255, 255, 255, 0.1);
+    color: #aaa; /* Kapalı (Irk) olduğu için gri yaptık */
+    cursor: not-allowed;
+}
+
+
+
+
+
+/* Karakter Seçim Ekranı Tasarımı */
+.character-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+.character-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s;
+}
+.character-card:hover { background: rgba(255, 255, 255, 0.15); }
+.char-info { text-align: left; }
+.char-name { font-size: 18px; font-weight: bold; color: #E4C000; margin-bottom: 5px; }
+.char-details { font-size: 12px; color: #aaa; }
+.play-btn {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.play-btn:hover { background: #2ecc71; }

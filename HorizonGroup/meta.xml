@@ -1,0 +1,30 @@
+<HorizonGroup>
+    <oop>true</oop>
+    <min_mta_version server="1.5.4-9.11413" />
+
+    <script src="core\binaries\clothes.lua" type="shared" cache="false" />
+    <script src="config.lua" type="shared" cache="false" />
+
+    <script src="core\binaries\custom_c.lua" type="client" cache="false" />    
+    <script src="core\binaries\custom_s.lua"/>
+
+    <file src="core\**\*.css" cache="false" />
+    <file src="core\**\*.html" cache="false" />
+    <file src="core\**\*.js" cache="false" />
+
+    <file src="core\**\*.woff2" cache="false" />
+    <file src="core\**\*.ttf" cache="false" />
+    <file src="core\**\*.woff" cache="false" />
+
+    <file src="core\**\*.png" cache="false" />
+    <file src="core\**\*.jpeg" cache="false" />
+    
+    <file src="core\**\*.dff" cache="false" />
+    <file src="core\**\*.txd" cache="false" />
+    <file src="core\**\*.col" cache="false" />
+
+
+    <export function="setPlayerRoupa" type="client"/>
+    <export function="resetCharacter" type="server"/>
+    <export function="reloadPlayerClothes" type="server"/>
+</HorizonGroup>

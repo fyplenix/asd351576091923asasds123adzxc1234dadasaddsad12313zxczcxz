@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper" id="char-create-panel">
+        <div class="container">
+            <h1 class="title">Karakter Oluşturma</h1>
+            <p class="subtitle">Los Santos'a hoş geldiniz. Lütfen karakterinizi tanımlayın.</p>
+            
+            <div class="input-group">
+                <input type="text" id="firstname" placeholder="Adın (Sadece Harf)" required>
+                <input type="text" id="lastname" placeholder="Soyadın (Sadece Harf)" required>
+            </div>
+            
+            <div class="input-row">
+                <input type="number" id="age" placeholder="Yaş (Min 18)" min="18" max="65" required>
+                <input type="number" id="height" placeholder="Boy (Min 150)" min="150" max="210" required>
+                <input type="number" id="weight" placeholder="Kilo (Min 45)" min="45" max="130" required>
+            </div>
+
+            <div class="input-group">
+                <select id="race" disabled>
+                    <option value="Türk" selected>Irk: Türk</option>
+                </select>
+                <p class="info-text">Sunucu konsepti gereği ırk sabittir.</p>
+            </div>
+
+            <div class="input-group">
+                <select id="gender" required>
+                    <option value="7" selected>Cinsiyet: Erkek</option>
+                    <option value="9">Cinsiyet: Kadın</option>
+                </select>
+            </div>
+
+            <button class="submit-btn" onclick="submitCharacter()">Karakteri Oluştur</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

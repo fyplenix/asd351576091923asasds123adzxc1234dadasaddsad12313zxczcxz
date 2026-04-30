@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-container { display: flex; gap: 20px; justify-content: center; }
+        .auth-box { flex: 1; background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); }
+        .auth-box h3 { margin-top: 0; color: #E4C000; }
+        .auth-box input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #444; background: rgba(0, 0, 0, 0.3); color: white; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+    <div class="wrapper" id="auth-panel">
+        <div class="container" style="width: 600px;">
+            <h1 class="title">Los Santos'a Hoş Geldiniz</h1>
+            <p class="subtitle">Lütfen devam etmek için giriş yapın veya kayıt olun.</p>
+            
+            <div class="auth-container">
+                <div class="auth-box">
+                    <h3>Giriş Yap</h3>
+                    <input type="text" id="log_user" placeholder="Kullanıcı Adı">
+                    <input type="password" id="log_pass" placeholder="Şifre">
+                    <button class="submit-btn" onclick="attemptLogin()">Giriş Yap</button>
+                </div>
+
+                <div class="auth-box">
+                    <h3>Kayıt Ol</h3>
+                    <input type="text" id="reg_user" placeholder="Kullanıcı Adı">
+                    <input type="password" id="reg_pass" placeholder="Şifre">
+                    <button class="submit-btn" style="background: #3498db;" onclick="attemptRegister()">Kayıt Ol</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
