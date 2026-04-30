@@ -1,0 +1,6 @@
+<meta>
+    <info author="ServerOwner" type="script" name="Professional Faction F3 System" />
+    <script src="server.lua" type="server" />
+    <script src="client.lua" type="client" />
+    <file src="html/f3.html" />
+</meta>

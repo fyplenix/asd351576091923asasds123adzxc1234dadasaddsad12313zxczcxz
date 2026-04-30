@@ -1,0 +1,13 @@
+<meta>
+    <info author="ServerOwner" type="script" version="1.0.0" name="Roleplay Vehicle Dealership" />
+    <script src="server.lua" type="server" />
+    <script src="client.lua" type="client" />
+    
+    <file src="html/index.html" />
+    <file src="html/style.css" />
+    <file src="html/script.js" />
+
+    <file src="files/number_police_tr.png" />
+    <file src="files/number_tr.png" />
+    <file src="files/font.ttf" />
+</meta>
